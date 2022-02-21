@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      /* デフォルトのレイアウトを削除 */
+        margin:0;
+        padding: 0;
+    }
+    
+    #outer{
+      width: 500px;
+ 
+      /* 図を真ん中に置く */
+      margin:50px auto;
+      background-color: antiquewhite;
+      /* 図の周りのpaddingを10px増やす */
+      padding:10px;
+      /* ボタンを真ん中に置く */
+      text-align: center;
+    }    
+  </style>
+  <script>
+    window.onload = function(){
+      // 機能：ボタンをクリックすれば図の切り替えができる
+
+      // 二つのボタンオブジェクトを取得
+      var btn01 = document.getElementById("btn01");
+      var btn02 = document.getElementById("btn02");
+
+      // 図の切り替えを実現するには、imgのsrc属性を変えること
+      // imgタグを取得する
+      var img = document.getElementById("img");
+
+      // 一つのArrayを作成し、図を保存する
+      var list = ["imgs/bg.jpg","imgs/img03.jpg","imgs/img04.jpg","imgs/img06.jpg","imgs/img07.jpg","imgs/img08.jpg"];
+      var index = 0;
+
+      // infoを書く,idがinfoのP要素を取得
+      var info = document.getElementById("info");
+      info.innerHTML = "全部は"+list.length+"枚の写真があります. "+"今は"+(index+1)+"枚目です";
+
+
+      // 二つのボタンに関数を紐づける
+      btn01.onclick = function(){
+        // 前の図に切り替えるのがindex--
+        index--;
+        // indexの最小値は０のため
+        if(index < 0){
+          index =  list.length-1;
+        };
+
+        img.src = list[index];
+        info.innerHTML = "全部は"+list.length+"枚の写真があります. "+"今は"+(index+1)+"枚目です";
+      };
+
+      btn02.onclick = function(){
+        // 次の図になるためにimg.srcの属性を変更する
+        // 要素の属性値を変える。　要素.属性 = 属性値
+        // 次の図になるのがindex++
+        index++;
+        if(index > list.length -1){
+          index = 0;
+        }
+        img.src = list[index];
+        info.innerHTML = "全部は"+list.length+"枚の写真があります. "+"今は"+(index+1)+"枚目です";
+
+      };
+    };
+  </script>
+ 
+</head>
+<body>
+  <div id="outer">
+    <p id="info"></p>
+    <img src="imgs/bg.jpg" alt="猫" id="img">
+
+    <!-- ボタンを作る -->
+    <button id="btn01"><前</button>
+    <button id="btn02">次></button>
+  </div>
+</body>
+</html>
